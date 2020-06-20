@@ -3,7 +3,8 @@
 ### 미배포
 ### [PlayGames 바로가기](https://school.programmers.co.kr/courses/10417/lessons/66434)
 
-# 기간: 20. 6. 20.(토) ~ 
+# 기간
+### 20. 6. 20.(토) ~ 진행 중
 
 # 목적
 
