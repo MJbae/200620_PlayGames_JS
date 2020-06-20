@@ -1,4 +1,4 @@
-# 200620_PlayGames_JS_HTML_CSS
+# 200620_PlayGames_JS
 ### JS 숙달 및 웹기본 복습을 위한 토이 프로젝트
 ### 미배포
 ### [PlayGames 바로가기](https://school.programmers.co.kr/courses/10417/lessons/66434)
