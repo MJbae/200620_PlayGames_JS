@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>welcom ! </title>
+</head>
+<body>
+	<form action="/email/form" method="post">
+		email: <input type="text" name="email"><br/>
+		password: <input type="password" name="password">
+	</form>
+	<button class="ajaxsend">login</button>
+
+	<div class="result"></div>
+
+	<script>
+		document.querySelector('.ajaxsend').addEventListener('click', function(){
+			var email = document.getElementsByName('email')[0].value;
+			var password = document.getElementsByName('password')[0].value;
+			sendAjax('http://localhost:3000/login', {'email' : email, 'password' : password}
+			);
+		});
+
+		function sendAjax(url, data){
+			data = JSON.stringify(data);
+
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', url);
+			//json 형태로 값을 쓰기 위해 content-type을 json으로 설정한다
+			xhr.setRequestHeader('Content-Type', "application/json");
+			xhr.send(data);
+
+			//응답이 제대로와서 load될 때 아래의 function이 실행됨 
+			xhr.addEventListener('load', function(){
+				var result = JSON.parse(xhr.responseText);
+				var resultDiv = document.querySelector(".result");
+
+				// 응답으로 받은 json에 email 값이 있으면 div(class = result) 다음의 메세지를 출력함
+				if(result.email){
+					window.location.href = "/main";
+				}
+				else resultDiv.innerHTML = result;
+
+			});
+		}
+
+
+	</script>
+	</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Intro Game </title>
+	<link rel="stylesheet" type="text/css" href="IntroGameCss.css">
+
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<style>
+		#all_of_game {
+	width: 400px;
+	margin:auto;
+}
+
+img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	border-radius: 30px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+.list_title {
+	display: none;
+
+}
+
+p {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px;
+	border-radius: 30px;
+    text-align: center;
+}
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   height: 50px;
+   background-color: black;
+   color: white;
+   text-align: center;
+}
+
+	</style>
+
+</head>
+
+	<body>
+
+		<div id="all_of_game">
+
+			<div>
+				<img src="https://ds1.static.rtbf.be/image/media/object/default/16x9/1248x702/b/c/8/bc8318307830522af1907e81f7b9d58a.jpg" width="410" height="300">
+			</div>
+
+			<div id="body">
+				
+				<p class="bg-primary LevelOne">Level 1 :)</p>
+				
+				<ul class="list_title list_one">
+					<li>
+						<a href="Games/가위바위보.html">가위바위보</a>
+					</li>
+					<li>
+						<a href="Games/구구단.html">구구단</a>
+					</li>
+					<li>
+						<a href="Games/끝말잇기.html">끝말잇기</a>
+					</li>				
+				</ul>
+
+				<p class="bg-success LevelTwo">Level 2 ;)</p>
+
+				
+				<ul class="list_title list_two">
+					<li>
+						<a href="Games/로또추첨기.html">로또추첨기</a>
+					</li>
+					<li>
+						<a href="Games/숫자야구.html">숫자야구</a>
+					</li>				
+				</ul>
+
+				<p class="bg-warning LevelThree">Level 3 :0</p>
+				
+				<ul class="list_title list_three">
+					<li>
+						<a href="Games/지뢰찾기.html">지뢰찾기</a>
+					</li>	
+				</ul>
+
+			</div>
+
+			<div class="footer">
+
+				<p>
+					Contact: gentlemmj@gmail.com / 010-4*2*-2*9*
+				</p>
+
+			</div>
+
+		</div>	
+	<script>
+		$(document).ready(function(){
+			$(".LevelOne").click(function(){
+
+				if($(".list_one").css("display") == 'none'){
+					$(".list_one").show();
+				} else{
+					$(".list_one").hide();
+				}
+				
+			});
+			$(".LevelTwo").click(function(){
+
+				if($(".list_two").css("display") == 'none'){
+					$(".list_two").show();
+				} else{
+					$(".list_two").hide();
+				}
+				
+			});
+			$(".LevelThree").click(function(){
+				if($(".list_three").css("display") == 'none'){
+					$(".list_three").show();
+				} else{
+					$(".list_three").hide();
+				}
+			});
+
+		});
+	</script>
+</body>
+
+</html>
