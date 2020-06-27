@@ -1,5 +1,5 @@
 # PlayGames_JS
-### 웹기본 복습, JS 숙달을 위한 토이 프로젝트
+### JS 숙달 및 웹기본 복습을 위한 토이 프로젝트
 ### [PlayGames 바로가기](https://playgames.netlify.app/)
 
 # 기간
