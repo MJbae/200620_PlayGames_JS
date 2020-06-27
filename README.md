@@ -1,4 +1,4 @@
-# 200620_PlayGames_JS
+# PlayGames_JS
 ### 웹기본 복습, JS 숙달, Node.js 활용을 위한 토이 프로젝트
 ### [PlayGames 바로가기](https://playgames.netlify.app/)
 
