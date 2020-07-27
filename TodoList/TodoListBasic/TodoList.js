@@ -52,12 +52,15 @@ function renderErrorNotification(errorMessage, elementId) {
 }
 
 function TodoApp(todoList, elementId) {
+  console.log('start TodoApp')
   // this 프로퍼티 정의, todoList 렌더링 및 리렌더링 기능 정의
   this.todos = todoList;
   this.elelmentId = document.querySelector(`#${elementId}`);
-  // TODO: . content의 기능은?
+  // TODO: .content의 기능은? css 내 content 접근?? 어떤 효과?
   this.listDom = document.querySelector(`#${elementId} .content`);
+
   this.render = () => {
+    console.log('start render')
     this.listDom.innerHTML = this.todos
       .map((todo) => {
         // TODO: 아래 배열 구문은 어떤 쓰임?
@@ -81,23 +84,25 @@ function TodoApp(todoList, elementId) {
     this.render();
   };
 
-  //
   this.listEditor = () => {
     // addList
+    console.log('start addList')
     this.elelmentId
       .querySelector('input[name="addList"]')
       .addEventListener('keyup', (event) => {
-        // 작성한 목록이 있고, enter를 눌렀을 때 add list 후 reset한다.
+        // 작성한 목록이 있고, enter를 눌렀을 때 add list 후 reset
         if (event.currentTarget.value && event.keyCode === 13) {
           const addData = {
             text: event.currentTarget.value,
             isCompleted: false,
           };
+          // TODO: 어떤 의미에서 immutable ?
           const immutableList = [...this.todos, addData];
           this.setState(immutableList);
           event.currentTarget.value = '';
         }
       });
+
     // removeList
     const buttons = this.listDom.querySelectorAll('button[name="deleteList"]');
     buttons.forEach((button, idx) => {
@@ -110,6 +115,8 @@ function TodoApp(todoList, elementId) {
         }
       });
     });
+
+    //TODO: 동작원리 이해하기 
     // checkList(isCompleted)
     const lists = this.listDom.querySelectorAll('li');
     lists.forEach((list, idx) => {

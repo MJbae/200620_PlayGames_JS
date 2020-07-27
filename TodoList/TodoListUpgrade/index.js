@@ -1,0 +1,1 @@
+const todoList = new TodoApp(data, 'todo-list');
