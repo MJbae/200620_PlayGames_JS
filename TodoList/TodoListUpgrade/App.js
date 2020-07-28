@@ -3,6 +3,8 @@ import { CheckDataFormat, renderErrorNotification } from './utils/utils.js';
 
 function App(todoList, elementId) {
   console.log('start App')
+  // elementDom을 동적으로 그림
+  TodoDomGenerator(elementId);
   // this 프로퍼티 정의, todoList 렌더링 및 리렌더링 기능 정의
   this.todos = todoList;
   this.elelmentId = document.querySelector(`#${elementId}`);
@@ -10,24 +12,19 @@ function App(todoList, elementId) {
   this.listDom = document.querySelector(`#${elementId} .content`);
 
   this.render = () => {
-    console.log('start render')
-    this.listDom.innerHTML = this.todos
-      .map((todo) => {
-        // TODO: 아래 배열 구문은 어떤 쓰임?
-        const { text, isCompleted = false } = todo;
-
-        if (!text) {
-          return;
-        }
-        return isCompleted
-          ? `<li><s>${text}</s><button type="text" name="deleteList"></button></li>`
-          : `<li>${text}<button type="text" name="deleteList"></button></li>`;
-      })
-      .join('');
-    this.listEditor()
-    // TODO: 왜 render() 내 listEditor()가 없으면 추가, 삭제, 삭선 생성 기능이 작동을 안할까?
-    //render로 DOM 객체를 브라우저 상에 표현만 하므로, 표현된 객체 하나하나에 이벤트를 걸어주는 작업이 추가적으로 필요함
-    // 그 작업을 listEditor가 수행. 
+    console.log('start render');
+    TodoList(this.todos, elementId);
+    // TODO: TodoInput 작동원리 이해하기
+    // -> listEditor를 매개변수로 전달하여, 내부의 객체함수의 콜백함수를 통해 TodoInput 컴포넌트에서 event handling함 
+    // 콜백함수의 전달값을 App 컴포넌트로 받고, App에서 this.todos 접근하여 변동사항을 업데이트 함
+    TodoInput({
+      elementId,
+      listEditor: {
+        add: addList,
+        remove: removeList,
+        check: checkList,
+      },
+    });
   };
 
   this.setState = (nextData) => {
@@ -37,54 +34,25 @@ function App(todoList, elementId) {
     this.render();
   };
 
-  this.listEditor = () => {
-    // addList
-    console.log('start listEditor')
-    this.elelmentId
-      .querySelector('input[name="addList"]')
-      .addEventListener('keyup', (event) => {
-        console.log('sensing keyup')
-        // 작성한 목록이 있고, enter를 눌렀을 때 add list 후 reset
-        if (event.currentTarget.value && event.keyCode === 13) {
-          console.log('sensing enter')
-          const addData = {
-            text: event.currentTarget.value,
-            isCompleted: false,
-          };
-          // 기존 배열인 this.todos에 접근하여 값을 변경하는 것이 아니라 immutableList에 
-          // 기존 값과 추가된 값을 더하여 원본 값에 변경을 주지 않음. 따라서 immutable하게 접근함
-          const immutableList = [...this.todos, addData];
-          this.setState(immutableList);
-          event.currentTarget.value = '';
-        }
-      });
+  const addList = (addData) => {
+    const immutableList = [...this.todos, addData];
+    this.setState(immutableList);
+  }
 
-    // removeList
-    // render 후에 listEditor를 호출하는 이유는 변경사항 발생에 따라 DOM 각 요소에 idx를 재할당하기 위해
-    const buttons = this.listDom.querySelectorAll('button[name="deleteList"]');
-    buttons.forEach((button, idx) => {
-      button.addEventListener('click', () => {
-        console.log('start removeList')
-        event.stopPropagation();
-        this.todos.splice(idx, 1);
-        this.render();
-        if (!this.todos.length) {
-          this.listDom.innerHTML = '목록을 추가해주세요 !';
-        }
-      });
-    });
-
-    // checkList(isCompleted)
-    const lists = this.listDom.querySelectorAll('li');
-    lists.forEach((list, idx) => {
-      list.addEventListener('click', () => {
-        console.log('start checkList')
-        var isCompletedOrigin = this.todos[idx].isCompleted;
-        this.todos[idx].isCompleted = !isCompletedOrigin;
-        this.render();
-      });
-    });
+  const removeList = (listIndex) => {
+    this.todos.splice(listIndex, 1);
+    this.render();
+    if (!this.todos.length) {
+      this.listDom.innerHTML = '목록을 추가해주세요'
+    }
   };
+
+  const checkList = (checkedIndex) => {
+    var isCompletedOrigin = this.todos[checkedIndex].isCompleted;
+    this.todos[checkedIndex].isCompleted = !isCompletedOrigin;
+    this.render();
+  };
+
 
   try {
     // new 생성자 함수 호출 여부 검증 및 todoList 데이터 적합성 검사
@@ -98,6 +66,6 @@ function App(todoList, elementId) {
     // 에러를 catch하여 해당 엘리먼트에 error UI를 구현한다.
     renderErrorNotification(error, elementId);
   }
-}
+};
 
 const todoList = new App(data, 'todo-list');
