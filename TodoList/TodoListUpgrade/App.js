@@ -1,16 +1,8 @@
-// TodoList.js에는 렌더링 시 리스트를 그려주는 부분만 남기고 나머지는 App.js로 이동
+import { data, wish, togo } from './utils/data.js';
+import { CheckDataFormat, renderErrorNotification } from './utils/utils.js';
 
-
-// error UI 구현, TODO: 해당 function 동작원리 상태 확인
-function renderErrorNotification(errorMessage, elementId) {
-  console.error(errorMessage);
-  document.querySelector(
-    `#${elementId} .content`
-  ).innerHTML = `리스트 형식을 다시 확인해주세요 :)`;
-}
-
-function TodoApp(todoList, elementId) {
-  console.log('start TodoApp')
+function App(todoList, elementId) {
+  console.log('start App')
   // this 프로퍼티 정의, todoList 렌더링 및 리렌더링 기능 정의
   this.todos = todoList;
   this.elelmentId = document.querySelector(`#${elementId}`);
@@ -32,6 +24,7 @@ function TodoApp(todoList, elementId) {
           : `<li>${text}<button type="text" name="deleteList"></button></li>`;
       })
       .join('');
+    this.listEditor()
     // TODO: 왜 render() 내 listEditor()가 없으면 추가, 삭제, 삭선 생성 기능이 작동을 안할까?
     //render로 DOM 객체를 브라우저 상에 표현만 하므로, 표현된 객체 하나하나에 이벤트를 걸어주는 작업이 추가적으로 필요함
     // 그 작업을 listEditor가 수행. 
@@ -95,7 +88,7 @@ function TodoApp(todoList, elementId) {
 
   try {
     // new 생성자 함수 호출 여부 검증 및 todoList 데이터 적합성 검사
-    if (!(this instanceof TodoApp)) {
+    if (!(this instanceof App)) {
       throw new Error('error: invalid function call!');
     }
     CheckDataFormat(todoList);
@@ -106,3 +99,5 @@ function TodoApp(todoList, elementId) {
     renderErrorNotification(error, elementId);
   }
 }
+
+const todoList = new App(data, 'todo-list');
