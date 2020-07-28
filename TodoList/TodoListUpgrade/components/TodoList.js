@@ -2,9 +2,10 @@
 
 // TodoList.js에는 렌더링 시 리스트를 그려주는 부분만 남기고 나머지는 App.js로 이동
 
-function TodoList(todoList, listDom) {
+function TodoList(todoList, elementId) {
   this.todoList = todoList;
-  this.listDom = listDom;
+  this.elementId = elementId;
+  this.listDom = document.querySelector(`#${this.elementId} .content`);
   this.render = () => {
     this.listDom.innerHTML = todoList
       .map((todo) => {
@@ -19,7 +20,8 @@ function TodoList(todoList, listDom) {
           : `<li>${text}<button type="text" name="deleteList"></button></li>`;
       })
       .join('');
-  }
+  };
+  this.render()
 };
 
 export default TodoList;

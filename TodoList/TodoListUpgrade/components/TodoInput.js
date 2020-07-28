@@ -2,7 +2,10 @@ function TodoInput({ elementId, listEditor }) {
   // section 태그 접근
   this.elementDom = document.querySelector(`#${elementId}`);
   // section 내 ul 태그 접근
-  this.listDom = this.elementDom.querySelector('.content');
+  this.listDom = document
+    .querySelector(`#${elementId}`)
+    .querySelector('.content');
+
   this.listEditor = listEditor;
   // input에 이벤트 검
   this.render = () => {
