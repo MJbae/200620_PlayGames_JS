@@ -1,12 +1,12 @@
 const TodoInput = ({ elementId, listEditor }) => {
   // section 태그 접근
-  const elementDom = document.querySelector(`#${elelmentId}`);
+  const elementDom = document.querySelector(`#${elementId}`);
   // section 내 ul 태그 접근
   const listDom = elementDom.querySelector('.content');
 
   // input에 이벤트 검
   elementDom
-    .querySelector('input[name="addLis"]')
+    .querySelector('input[name="addList"]')
     .addEventListener('keyup', (event) => {
       console.log('sensing keyup')
       // 작성한 목록이 있고, enter를 눌렀을 때 add list 후 reset

@@ -1,5 +1,8 @@
-import { data, wish, togo } from './utils/data.js';
+import TodoDomGenerator from './TodoDomGenerator.js';
+import TodoList from './TodoList.js';
+import TodoInput from './TodoInput.js';
 import { CheckDataFormat, renderErrorNotification } from './utils/utils.js';
+import { data, wish, togo } from './utils/data.js';
 
 function App(todoList, elementId) {
   console.log('start App')
@@ -16,7 +19,7 @@ function App(todoList, elementId) {
     TodoList(this.todos, elementId);
     // TODO: TodoInput 작동원리 이해하기
     // -> listEditor를 매개변수로 전달하여, 내부의 객체함수의 콜백함수를 통해 TodoInput 컴포넌트에서 event handling함 
-    // 콜백함수의 전달값을 App 컴포넌트로 받고, App에서 this.todos 접근하여 변동사항을 업데이트 함
+    // 콜백함수의 전달값을 App 컴포넌트로 받고, App에서 this.todos 접근하여 변동사항을 업데이트(render) 함
     TodoInput({
       elementId,
       listEditor: {
