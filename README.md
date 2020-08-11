@@ -3,7 +3,7 @@
 ### [PlayGames 바로가기](https://playgames.netlify.app/)
 
 # 기간
-* 20. 6. 20.(토) ~ 진행 중
+* '20. 6. 20.(토) ~ 진행 중
 
 # 향후계획
 ### Node.js 기반 웹백엔드 기능 합치기
